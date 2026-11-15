@@ -114,10 +114,10 @@ Quy tắc:
 
 ## 6. SEO
 
-- `metadata` riêng từng trang, lấy từ `seo.title` và `seo.description` của từng cá
-- `sitemap.xml` và `robots.txt` sinh bằng `app/sitemap.ts` và `app/robots.ts`, dùng `NEXT_PUBLIC_SITE_URL`
-- JSON-LD `Product` cho trang chi tiết; chỉ thêm `offers` khi `price` khác `null`
-- Open Graph image cho mỗi cá (dùng ảnh đầu tiên nếu có)
+- `metadata` riêng từng trang, lấy từ `seo.title` và `seo.description` của từng cá; mỗi trang có `canonical`, Open Graph và Twitter card (hàm `buildPageMetadata` trong `lib/seo.ts`)
+- `sitemap.xml` và `robots.txt` sinh bằng `app/sitemap.ts` và `app/robots.ts`, dùng URL gốc từ `getSiteUrl()`: ưu tiên `NEXT_PUBLIC_SITE_URL`, sau đó URL Vercel cấp cho deployment, cuối cùng là `http://localhost:3000` (để build ở máy và CI không lỗi). Sitemap gồm trang chủ, `/chinh-sach`, `/lien-he` và các cá không `hidden`
+- JSON-LD `Product` cho trang chi tiết; mỗi phân loại có giá khác `null` là một `Offer` (VND, `availability` theo trạng thái phân loại); không có phân loại nào có giá thì bỏ hẳn `offers`; chỉ có `image` khi cá có ảnh; không có đánh giá hay dữ liệu chưa có
+- Open Graph image cho mỗi cá (dùng ảnh đầu tiên nếu có). Muốn có ảnh chia sẻ mặc định cho cả site (nên là ảnh ngang 1200x630), đặt file `app/opengraph-image.jpg`
 - `lang="vi"` trên thẻ `<html>`
 - Alt text tiếng Việt cho mọi ảnh
 
@@ -133,7 +133,7 @@ Khai báo tên trong `.env.example`, giá trị thật đặt trên Vercel và `
 
 | Biến | Ý nghĩa |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | URL gốc của site (dùng cho sitemap, canonical, OG) |
+| `NEXT_PUBLIC_SITE_URL` | URL gốc của site (dùng cho sitemap, canonical, OG). Nên đặt trên Vercel khi đã có domain riêng, ví dụ `https://ten-mien.vn`; nếu chưa đặt thì dùng URL Vercel cấp |
 
 Thông tin liên hệ (số điện thoại, link Zalo, TikTok, Facebook...) không còn là biến môi trường mà nằm trong `data/site.json` (xem mục 4.4).
 
