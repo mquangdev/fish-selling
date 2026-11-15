@@ -86,7 +86,7 @@ interface Fish {
   tagline: string;
   description: string;
   variants: FishVariant[];
-  images: { src: string; alt: string }[];  // đường dẫn dưới public/
+  images: { src: string; alt: string; position?: string }[];  // đường dẫn dưới public/; position tùy chọn, vd "50% 96%" = điểm lấy nét khi ảnh bị cắt (ảnh dọc có con cá ở phía dưới)
   videos: FishVideo[];
   gradeNotes?: Record<string, string>;  // ghi chú theo tên phẩm (khóa phải trùng một grade)
   care: {
