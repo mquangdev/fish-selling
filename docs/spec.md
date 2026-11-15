@@ -31,7 +31,7 @@ Người chơi cá cảnh tại Việt Nam, đa số xem bằng điện thoại,
 - Tạo tĩnh bằng `generateStaticParams` từ `data/fish.json`; slug không tồn tại trả 404
 - Gallery ảnh (và video nếu có), ảnh đầu là ảnh chính; không có ảnh thì hiện placeholder
 - Tên, tên khoa học, tagline, mô tả
-- Bảng "Size và giá" từ `variants` (giá `null` hiện "Liên hệ")
+- Mục "Size và giá" từ `variants`, gom nhóm theo `grade` (ví dụ "Phẩm đẹp", "Phẩm thủy sinh"). Mỗi phân loại hiện tên, size (chỉ khi `sizeCm` khác `null`), giá (`null` hiện "Liên hệ"), nhãn "Còn hàng" / "Hết hàng" theo `status`, và ảnh nhỏ nếu có `images`. Bấm một phân loại thì gallery chuyển sang ảnh của phân loại đó (nếu có), nếu không có thì giữ ảnh chung của cá
 - Khối "Thông tin chăm sóc": nhiệt độ, pH, kích thước trưởng thành, bể tối thiểu, tính cách, thức ăn, mẹo
 - Khối "Nguồn gốc": thông tin sinh sản từ `breeding` (ẩn các trường `null`)
 - Nút "Hỏi mua qua Zalo" cố định; link Zalo có sẵn nội dung tin nhắn mẫu nhắc tên cá nếu cấu hình cho phép
@@ -56,11 +56,17 @@ Nguồn dữ liệu duy nhất: `data/fish.json` (mảng các con cá). Kiểu T
 ```ts
 type FishStatus = "available" | "sold_out" | "coming_soon" | "hidden";
 
+type VariantStatus = "available" | "sold_out";
+
 interface FishVariant {
-  label: string;          // "Size nhỏ"
-  sizeCm: string;         // "2-3"
+  id: string;             // duy nhất trong từng cá, ASCII kebab-case, vd "dep-to"; dùng làm key và thư mục ảnh
+  grade: string | null;   // nhóm phẩm, vd "Phẩm đẹp"; null nếu cá không chia phẩm
+  label: string;          // "Size tơ"
+  sizeCm: string | null;  // "2-3"; null = chưa rõ
   price: number | null;   // VND, số nguyên; null = liên hệ
-  stock: number | null;   // null = chưa rõ
+  stock: number | null;   // null = chưa rõ (không hiển thị)
+  status: VariantStatus;  // còn hàng hay hết hàng của riêng phân loại này
+  images: { src: string; alt: string }[];  // ảnh riêng của phân loại, có thể rỗng
 }
 
 interface Fish {
@@ -92,7 +98,9 @@ interface Fish {
 
 Quy tắc:
 - Có hàm kiểm tra dữ liệu lúc build (slug trùng, thiếu trường bắt buộc, giá âm hoặc không phải số nguyên) để build lỗi sớm
+- Hàm kiểm tra cũng bắt: `variants[].id` trùng hoặc sai định dạng, `status` của cá không khớp với các phân loại (cá `available` phải còn ít nhất một phân loại còn hàng; cá `sold_out` không được có phân loại còn hàng)
 - Trường `todo` không bao giờ được render ra giao diện hay đưa vào HTML
+- Ảnh riêng của phân loại đặt ở `public/images/<slug>/<variant-id>/1.jpg`
 - Khi chủ trại thêm ảnh, `images` khai báo `{ "src": "/images/<slug>/1.jpg", "alt": "..." }`
 
 ## 6. SEO

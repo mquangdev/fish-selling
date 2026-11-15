@@ -3,13 +3,28 @@ import rawFish from "@/data/fish.json";
 export type FishStatus = "available" | "sold_out" | "coming_soon" | "hidden";
 export type FishCategory = "pleco" | "molly";
 
+export type VariantStatus = "available" | "sold_out";
+
+export interface FishImage {
+  src: string;
+  alt: string;
+}
+
 export interface FishVariant {
+  /** Unique within a fish, ASCII kebab-case. Used for keys and the image folder. */
+  id: string;
+  /** Grade group, e.g. "Phẩm đẹp". null when the fish has no grades. */
+  grade: string | null;
   label: string;
-  sizeCm: string;
+  /** null = unknown. */
+  sizeCm: string | null;
   /** VND, integer. null = ask on Zalo. */
   price: number | null;
   /** null = unknown. */
   stock: number | null;
+  status: VariantStatus;
+  /** Photos of this variant. May be empty. */
+  images: FishImage[];
 }
 
 export interface Fish {
@@ -23,7 +38,7 @@ export interface Fish {
   tagline: string;
   description: string;
   variants: FishVariant[];
-  images: { src: string; alt: string }[];
+  images: FishImage[];
   videos: { src: string; title: string }[];
   care: {
     temperatureC: [number, number];
@@ -46,6 +61,7 @@ const STATUSES: readonly FishStatus[] = [
   "coming_soon",
   "hidden",
 ];
+const VARIANT_STATUSES: readonly VariantStatus[] = ["available", "sold_out"];
 const CATEGORIES: readonly FishCategory[] = ["pleco", "molly"];
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -70,6 +86,22 @@ function isRange(value: unknown): value is [number, number] {
     value.every((n) => typeof n === "number" && Number.isFinite(n)) &&
     value[0] <= value[1]
   );
+}
+
+function checkImages(
+  value: unknown,
+  at: string,
+  err: (msg: string) => void,
+): void {
+  if (!Array.isArray(value)) {
+    err(`${at} must be an array`);
+    return;
+  }
+  value.forEach((img: unknown, i: number) => {
+    if (!isObj(img) || !isNonEmptyString(img.src) || !isNonEmptyString(img.alt)) {
+      err(`${at}[${i}] needs non-empty "src" and "alt"`);
+    }
+  });
 }
 
 function validateOne(item: unknown, index: number, errors: string[]): void {
@@ -103,29 +135,50 @@ function validateOne(item: unknown, index: number, errors: string[]): void {
   if (!Array.isArray(item.variants)) {
     err(`"variants" must be an array`);
   } else {
+    const variantIds = new Set<string>();
+    let availableCount = 0;
     item.variants.forEach((v: unknown, i: number) => {
       const at = `variants[${i}]`;
       if (!isObj(v)) return err(`${at} must be an object`);
+      if (!isNonEmptyString(v.id) || !SLUG_PATTERN.test(v.id)) {
+        err(`${at}.id must be lowercase ASCII kebab-case`);
+      } else if (variantIds.has(v.id)) {
+        err(`${at}.id "${v.id}" is duplicated`);
+      } else {
+        variantIds.add(v.id);
+      }
+      if (v.grade !== null && !isNonEmptyString(v.grade)) {
+        err(`${at}.grade must be null or a non-empty string`);
+      }
       if (!isNonEmptyString(v.label)) err(`${at}.label must be a non-empty string`);
-      if (!isNonEmptyString(v.sizeCm)) err(`${at}.sizeCm must be a non-empty string`);
+      if (v.sizeCm !== null && !isNonEmptyString(v.sizeCm)) {
+        err(`${at}.sizeCm must be null or a non-empty string`);
+      }
       if (v.price !== null && !isNonNegativeInt(v.price)) {
         err(`${at}.price must be null or a non-negative integer (got ${String(v.price)})`);
       }
       if (v.stock !== null && !isNonNegativeInt(v.stock)) {
         err(`${at}.stock must be null or a non-negative integer (got ${String(v.stock)})`);
       }
+      if (!VARIANT_STATUSES.includes(v.status as VariantStatus)) {
+        err(`${at}.status must be one of ${VARIANT_STATUSES.join(", ")}`);
+      } else if (v.status === "available") {
+        availableCount += 1;
+      }
+      checkImages(v.images, `${at}.images`, err);
     });
+    // Fish status and variant availability must agree.
+    if (item.variants.length > 0) {
+      if (item.status === "available" && availableCount === 0) {
+        err(`status is "available" but every variant is sold out`);
+      }
+      if (item.status === "sold_out" && availableCount > 0) {
+        err(`status is "sold_out" but some variants are still available`);
+      }
+    }
   }
 
-  if (!Array.isArray(item.images)) {
-    err(`"images" must be an array`);
-  } else {
-    item.images.forEach((img: unknown, i: number) => {
-      if (!isObj(img) || !isNonEmptyString(img.src) || !isNonEmptyString(img.alt)) {
-        err(`images[${i}] needs non-empty "src" and "alt"`);
-      }
-    });
-  }
+  checkImages(item.images, "images", err);
   if (!Array.isArray(item.videos)) {
     err(`"videos" must be an array`);
   } else {
@@ -250,7 +303,7 @@ export function getZaloMessage(fish: Fish): string {
 /** Combined size range across variants, e.g. "2-5 cm". null if unknown. */
 export function getSizeRange(fish: Fish): string | null {
   const numbers = fish.variants
-    .flatMap((variant) => variant.sizeCm.match(/\d+(?:[.,]\d+)?/g) ?? [])
+    .flatMap((variant) => variant.sizeCm?.match(/\d+(?:[.,]\d+)?/g) ?? [])
     .map((value) => Number(value.replace(",", ".")))
     .filter((value) => Number.isFinite(value));
   if (numbers.length === 0) return null;
@@ -259,12 +312,34 @@ export function getSizeRange(fish: Fish): string | null {
   return min === max ? `${min} cm` : `${min}-${max} cm`;
 }
 
-/** Lowest known variant price, or null when every price is "contact". */
+/**
+ * Lowest known price among in-stock variants (falls back to all variants when
+ * nothing is in stock). null when every price is "contact".
+ */
 export function getStartingPrice(fish: Fish): number | null {
-  const prices = fish.variants
+  const inStock = fish.variants.filter((v) => v.status === "available");
+  const pool = inStock.length > 0 ? inStock : fish.variants;
+  const prices = pool
     .map((variant) => variant.price)
     .filter((price): price is number => price !== null);
   return prices.length > 0 ? Math.min(...prices) : null;
+}
+
+export interface VariantGroup {
+  /** null when the fish has no grades. */
+  grade: string | null;
+  variants: FishVariant[];
+}
+
+/** Groups variants by grade, keeping the order in which grades first appear. */
+export function groupVariantsByGrade(variants: FishVariant[]): VariantGroup[] {
+  const groups: VariantGroup[] = [];
+  for (const variant of variants) {
+    const group = groups.find((item) => item.grade === variant.grade);
+    if (group) group.variants.push(variant);
+    else groups.push({ grade: variant.grade, variants: [variant] });
+  }
+  return groups;
 }
 
 export function getAllFish(): Fish[] {

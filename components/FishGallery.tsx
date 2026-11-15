@@ -3,17 +3,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import FishPlaceholder from "@/components/FishPlaceholder";
+import { useVariantSelection } from "@/components/fish/VariantSelection";
+import type { FishImage, FishVariant } from "@/lib/fish";
 
-interface GalleryImage {
-  src: string;
-  alt: string;
-}
-
-export default function FishGallery({
+function GalleryView({
   images,
   name,
 }: {
-  images: GalleryImage[];
+  images: FishImage[];
   name: string;
 }) {
   const [index, setIndex] = useState(0);
@@ -63,5 +60,32 @@ export default function FishGallery({
         </ul>
       )}
     </div>
+  );
+}
+
+/**
+ * Shows the selected variant's photos when it has any; otherwise the fish's
+ * general photos (or a placeholder when there are none).
+ */
+export default function FishGallery({
+  images,
+  variants,
+  name,
+}: {
+  images: FishImage[];
+  variants: FishVariant[];
+  name: string;
+}) {
+  const { selectedId } = useVariantSelection();
+  const selected = variants.find((variant) => variant.id === selectedId);
+  const shown = selected && selected.images.length > 0 ? selected.images : images;
+
+  // Remount when the shown set changes so the main image resets to the first one.
+  return (
+    <GalleryView
+      key={selected && selected.images.length > 0 ? selected.id : "general"}
+      images={shown}
+      name={name}
+    />
   );
 }
