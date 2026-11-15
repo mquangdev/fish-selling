@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site";
 
 const baseClass =
@@ -18,6 +21,11 @@ function ChatIcon() {
 }
 
 export default function ZaloButton() {
+  const pathname = usePathname();
+
+  // Fish pages have their own sticky Zalo bar; avoid showing two buttons.
+  if (pathname.startsWith("/ca/")) return null;
+
   if (!siteConfig.zaloUrl) {
     // Not configured: show a visible notice instead of a broken link.
     return (

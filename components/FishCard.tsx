@@ -1,27 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import FishPlaceholder from "@/components/FishPlaceholder";
+import StatusBadge from "@/components/StatusBadge";
 import {
-  STATUS_LABELS,
   formatPrice,
   getSizeRange,
   getStartingPrice,
   type Fish,
-  type FishStatus,
 } from "@/lib/fish";
-
-const STATUS_STYLES: Record<FishStatus, string> = {
-  available: "bg-emerald-100 text-emerald-800",
-  sold_out: "bg-slate-200 text-slate-700",
-  coming_soon: "bg-amber-100 text-amber-800",
-  hidden: "",
-};
 
 export default function FishCard({ fish }: { fish: Fish }) {
   const cover = fish.images[0];
   const size = getSizeRange(fish);
   const startingPrice = getStartingPrice(fish);
-  const statusLabel = STATUS_LABELS[fish.status];
 
   return (
     <Link
@@ -40,13 +31,7 @@ export default function FishCard({ fish }: { fish: Fish }) {
         ) : (
           <FishPlaceholder name={fish.name} />
         )}
-        {statusLabel && (
-          <span
-            className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-semibold ${STATUS_STYLES[fish.status]}`}
-          >
-            {statusLabel}
-          </span>
-        )}
+        <StatusBadge status={fish.status} className="absolute left-3 top-3" />
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
