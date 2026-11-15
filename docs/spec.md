@@ -29,9 +29,9 @@ Người chơi cá cảnh tại Việt Nam, đa số xem bằng điện thoại,
 
 ### 4.2 Trang chi tiết `/ca/[slug]`
 - Tạo tĩnh bằng `generateStaticParams` từ `data/fish.json`; slug không tồn tại trả 404
-- Gallery ảnh (và video nếu có), ảnh đầu là ảnh chính; không có ảnh thì hiện placeholder
+- Gallery ảnh và video: ảnh đầu là ảnh chính, video phát ngay trong gallery (khung dọc, có chú thích tên video, chỉ phát khi khách bấm); không có ảnh/video thì hiện placeholder
 - Tên, tên khoa học, tagline, mô tả
-- Mục "Size và giá" từ `variants`, gom nhóm theo `grade` (ví dụ "Phẩm đẹp", "Phẩm thủy sinh"). Mỗi phân loại hiện tên, size (chỉ khi `sizeCm` khác `null`), giá (`null` hiện "Liên hệ"), nhãn "Còn hàng" / "Hết hàng" theo `status`, và ảnh nhỏ nếu có `images`. Bấm một phân loại thì gallery chuyển sang ảnh của phân loại đó (nếu có), nếu không có thì giữ ảnh chung của cá
+- Mục "Size và giá" từ `variants`, gom nhóm theo `grade` (ví dụ "Phẩm đẹp", "Phẩm thủy sinh"). Mỗi phân loại hiện tên, size (chỉ khi `sizeCm` khác `null`), giá (`null` hiện "Liên hệ"), nhãn "Còn hàng" / "Hết hàng" theo `status`, và ảnh nhỏ nếu có `images`. Bấm một phân loại thì gallery chuyển sang ảnh và video của phân loại đó (nếu có), nếu không có thì giữ media chung của cá. Mỗi phẩm có thể có một dòng ghi chú (`gradeNotes`) hiện một lần dưới tiêu đề phẩm, ví dụ "video chỉ để tham khảo"
 - Khối "Thông tin chăm sóc": nhiệt độ, pH, kích thước trưởng thành, bể tối thiểu, tính cách, thức ăn, mẹo
 - Khối "Nguồn gốc": thông tin sinh sản từ `breeding` (ẩn các trường `null`)
 - Nút "Hỏi mua qua Zalo" cố định; link Zalo có sẵn nội dung tin nhắn mẫu nhắc tên cá nếu cấu hình cho phép
@@ -67,6 +67,13 @@ interface FishVariant {
   stock: number | null;   // null = chưa rõ (không hiển thị)
   status: VariantStatus;  // còn hàng hay hết hàng của riêng phân loại này
   images: { src: string; alt: string }[];  // ảnh riêng của phân loại, có thể rỗng
+  videos: FishVideo[];    // video riêng của phân loại, có thể rỗng
+}
+
+interface FishVideo {
+  src: string;            // đường dẫn dưới public/, đuôi .mp4 hoặc .webm
+  title: string;          // chú thích, vd "Size tơ phẩm đẹp, có đèn"
+  poster?: string;        // ảnh bìa tùy chọn; không có thì dùng khung hình đầu
 }
 
 interface Fish {
@@ -80,7 +87,8 @@ interface Fish {
   description: string;
   variants: FishVariant[];
   images: { src: string; alt: string }[];  // đường dẫn dưới public/
-  videos: { src: string; title: string }[];
+  videos: FishVideo[];
+  gradeNotes?: Record<string, string>;  // ghi chú theo tên phẩm (khóa phải trùng một grade)
   care: {
     temperatureC: [number, number];
     ph: [number, number];
@@ -100,7 +108,8 @@ Quy tắc:
 - Có hàm kiểm tra dữ liệu lúc build (slug trùng, thiếu trường bắt buộc, giá âm hoặc không phải số nguyên) để build lỗi sớm
 - Hàm kiểm tra cũng bắt: `variants[].id` trùng hoặc sai định dạng, `status` của cá không khớp với các phân loại (cá `available` phải còn ít nhất một phân loại còn hàng; cá `sold_out` không được có phân loại còn hàng)
 - Trường `todo` không bao giờ được render ra giao diện hay đưa vào HTML
-- Ảnh riêng của phân loại đặt ở `public/images/<slug>/<variant-id>/1.jpg`
+- Ảnh riêng của phân loại đặt ở `public/images/<slug>/<variant-id>/1.jpg`; video đặt cùng thư mục (ví dụ `public/images/<slug>/<variant-id>/ten-video.mp4`). Nên dùng H.264 + AAC, dọc hoặc ngang đều được, vài MB mỗi file
+- Hàm kiểm tra cũng bắt: `videos[].src` không bắt đầu bằng `/` hoặc sai đuôi, `title` rỗng, `gradeNotes` có khóa không trùng phẩm nào
 - Khi chủ trại thêm ảnh, `images` khai báo `{ "src": "/images/<slug>/1.jpg", "alt": "..." }`
 
 ## 6. SEO
