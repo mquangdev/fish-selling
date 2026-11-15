@@ -11,6 +11,10 @@ import VariantsTable from "@/components/fish/VariantsTable";
 import ZaloStickyBar from "@/components/fish/ZaloStickyBar";
 import { getFishBySlug, getVisibleFish, getZaloMessage } from "@/lib/fish";
 
+// Known slugs are prerendered by generateStaticParams. Unknown or hidden slugs
+// must block so notFound() can return a real HTTP 404 instead of a streamed 200.
+export const instant = false;
+
 function findVisibleFish(slug: string) {
   const fish = getFishBySlug(slug);
   return fish && fish.status !== "hidden" ? fish : undefined;
@@ -41,7 +45,10 @@ export default async function FishDetailPage({
   return (
     <div className="mx-auto max-w-5xl px-4 py-6 md:py-10">
       <nav aria-label="Đường dẫn" className="text-sm text-ocean-700">
-        <Link href="/" className="underline-offset-4 hover:underline">
+        <Link
+          href="/"
+          className="inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+        >
           Trang chủ
         </Link>
         <span aria-hidden="true"> / </span>
