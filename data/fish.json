@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "pleco-l144",
+    "name": "Pleco L144",
+    "commonName": "Bristlenose L144",
+    "scientificName": "Ancistrus sp. (L144)",
+    "category": "pleco",
+    "status": "available",
+    "tagline": "Pleco bristlenose nhà nuôi, hiền, nhỏ gọn, hợp bể cộng đồng",
+    "description": "Pleco L144 thuộc nhóm bristlenose (Ancistrus), nổi tiếng hiền lành, nhỏ gọn và dễ nuôi, phù hợp bể cộng đồng và bể thủy sinh. Cá hoạt động nhiều về đêm, thích ẩn nấp trong hang và gỗ lũa. Cá được trại tự sinh sản và nuôi tại trại.",
+    "variants": [
+      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
+      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+    ],
+    "images": [],
+    "videos": [],
+    "care": {
+      "temperatureC": [22, 28],
+      "ph": [6.5, 7.5],
+      "adultSizeCm": 10,
+      "minTankLiters": 40,
+      "temperament": "Hiền, sống hòa bình với cá cộng đồng",
+      "diet": "Ăn tạp: viên chìm cho pleco, rau củ trụng (bí, dưa leo), rêu tảo",
+      "tips": [
+        "Cần hang, ống gốm hoặc gỗ lũa để cá ẩn nấp",
+        "Giữ nước sạch, nhiều oxy",
+        "Cho ăn buổi tối vì cá hoạt động nhiều về đêm"
+      ]
+    },
+    "breeding": {
+      "source": "Nhà nuôi sinh sản",
+      "generation": null,
+      "note": "Điền thông tin cá bố mẹ và thế hệ"
+    },
+    "seo": {
+      "title": "Pleco L144 nhà nuôi | Cá bristlenose khỏe, dễ nuôi",
+      "description": "Pleco L144 (Ancistrus sp.) nhà nuôi sinh sản, hiền, nhỏ gọn, hợp bể cộng đồng. Nhắn Zalo để biết size và giá."
+    },
+    "todo": [
+      "L144 hay bị gọi nhầm: bản gốc nhập từ Paraguay khác với dòng 'blue eye lemon' (vàng, mắt xanh/đen) bán phổ biến. Ghi đúng loại đang nuôi vào description và commonName.",
+      "Kiểm tra lại cỡ trưởng thành và thông số thực tế với cá của bạn",
+      "Điền giá, size, số lượng, thông tin cá bố mẹ",
+      "Thêm ảnh vào public/images/pleco-l144/ và khai báo trong images"
+    ]
+  },
+  {
+    "slug": "molly-sakura-caramel",
+    "name": "Molly Sakura Caramel",
+    "commonName": "Molly Sakura Caramel",
+    "scientificName": "Poecilia sp. (molly cảnh, dòng lai tạo)",
+    "category": "molly",
+    "status": "available",
+    "tagline": "Molly màu caramel nổi bật, dễ nuôi, đẻ con",
+    "description": "Molly Sakura Caramel là dòng molly cảnh có màu sắc nổi bật, khỏe, dễ nuôi và sinh sản đều. Cá hợp bể cộng đồng và thích hợp cho người mới chơi cá.",
+    "variants": [
+      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
+      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+    ],
+    "images": [],
+    "videos": [],
+    "care": {
+      "temperatureC": [24, 28],
+      "ph": [7.0, 8.5],
+      "adultSizeCm": 8,
+      "minTankLiters": 60,
+      "temperament": "Hiền, nuôi theo nhóm",
+      "diet": "Ăn tạp: thức ăn viên, artemia, rau luộc, thức ăn có spirulina",
+      "tips": [
+        "Ưa nước hơi cứng, hơi kiềm; tránh nước quá mềm và axit",
+        "Nên nuôi nhóm với tỷ lệ 1 đực : 2-3 cái để đực đỡ đuổi cái",
+        "Cá đẻ con, nên có cây thủy sinh hoặc lưới để cá con ẩn nấp"
+      ]
+    },
+    "breeding": {
+      "source": "Nhà nuôi sinh sản",
+      "generation": null,
+      "note": "Điền thông tin cá bố mẹ và thế hệ"
+    },
+    "seo": {
+      "title": "Molly Sakura Caramel nhà nuôi | Màu đẹp, dễ nuôi",
+      "description": "Molly Sakura Caramel nhà nuôi sinh sản, màu nổi bật, khỏe, dễ chăm. Nhắn Zalo để biết size và giá."
+    },
+    "todo": [
+      "Mô tả lại màu sắc đúng với cá thật của bạn",
+      "Điền giá, size, số lượng, thông tin cá bố mẹ",
+      "Thêm ảnh vào public/images/molly-sakura-caramel/ và khai báo trong images"
+    ]
+  },
+  {
+    "slug": "molly-sanke",
+    "name": "Molly Sanke",
+    "commonName": "Molly Sanke",
+    "scientificName": "Poecilia sp. (molly cảnh, dòng lai tạo)",
+    "category": "molly",
+    "status": "available",
+    "tagline": "Molly hoa văn ba màu kiểu koi Sanke, khỏe và dễ nuôi",
+    "description": "Molly Sanke có hoa văn nhiều mảng màu lấy cảm hứng từ cá koi Sanke, tạo điểm nhấn cho bể cộng đồng. Cá khỏe, dễ nuôi và sinh sản đều.",
+    "variants": [
+      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
+      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+    ],
+    "images": [],
+    "videos": [],
+    "care": {
+      "temperatureC": [24, 28],
+      "ph": [7.0, 8.5],
+      "adultSizeCm": 8,
+      "minTankLiters": 60,
+      "temperament": "Hiền, nuôi theo nhóm",
+      "diet": "Ăn tạp: thức ăn viên, artemia, rau luộc, thức ăn có spirulina",
+      "tips": [
+        "Ưa nước hơi cứng, hơi kiềm; tránh nước quá mềm và axit",
+        "Nên nuôi nhóm với tỷ lệ 1 đực : 2-3 cái để đực đỡ đuổi cái",
+        "Cá đẻ con, nên có cây thủy sinh hoặc lưới để cá con ẩn nấp"
+      ]
+    },
+    "breeding": {
+      "source": "Nhà nuôi sinh sản",
+      "generation": null,
+      "note": "Điền thông tin cá bố mẹ và thế hệ"
+    },
+    "seo": {
+      "title": "Molly Sanke nhà nuôi | Hoa văn đẹp, dễ nuôi",
+      "description": "Molly Sanke nhà nuôi sinh sản, hoa văn nổi bật, khỏe, dễ chăm. Nhắn Zalo để biết size và giá."
+    },
+    "todo": [
+      "Mô tả lại màu và hoa văn đúng với cá thật của bạn",
+      "Điền giá, size, số lượng, thông tin cá bố mẹ",
+      "Thêm ảnh vào public/images/molly-sanke/ và khai báo trong images"
+    ]
+  }
+]
