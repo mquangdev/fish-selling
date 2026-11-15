@@ -8,6 +8,20 @@ export type VariantStatus = "available" | "sold_out";
 export interface FishImage {
   src: string;
   alt: string;
+  /**
+   * Optional focal point used when the image is cropped, as CSS object-position
+   * "<x>% <y>%" (0-100). Example: "50% 88%" keeps the bottom of a tall photo.
+   */
+  position?: string;
+}
+
+export interface FishVideo {
+  /** Path under public/, ending in .mp4 or .webm. */
+  src: string;
+  /** Short caption, also used as the accessible label. */
+  title: string;
+  /** Optional cover image; the first frame is used when missing. */
+  poster?: string;
 }
 
 export interface FishVariant {
@@ -25,6 +39,8 @@ export interface FishVariant {
   status: VariantStatus;
   /** Photos of this variant. May be empty. */
   images: FishImage[];
+  /** Videos of this variant. May be empty. */
+  videos: FishVideo[];
 }
 
 export interface Fish {
@@ -39,7 +55,12 @@ export interface Fish {
   description: string;
   variants: FishVariant[];
   images: FishImage[];
-  videos: { src: string; title: string }[];
+  videos: FishVideo[];
+  /**
+   * Optional note per grade, keyed by the variant `grade` name, shown once
+   * under that grade's heading (e.g. "videos are for reference only").
+   */
+  gradeNotes?: Record<string, string>;
   care: {
     temperatureC: [number, number];
     ph: [number, number];
@@ -88,6 +109,14 @@ function isRange(value: unknown): value is [number, number] {
   );
 }
 
+const FOCAL_POINT_PATTERN = /^(\d{1,3})% (\d{1,3})%$/;
+
+function isFocalPoint(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const match = FOCAL_POINT_PATTERN.exec(value);
+  return !!match && Number(match[1]) <= 100 && Number(match[2]) <= 100;
+}
+
 function checkImages(
   value: unknown,
   at: string,
@@ -100,6 +129,38 @@ function checkImages(
   value.forEach((img: unknown, i: number) => {
     if (!isObj(img) || !isNonEmptyString(img.src) || !isNonEmptyString(img.alt)) {
       err(`${at}[${i}] needs non-empty "src" and "alt"`);
+      return;
+    }
+    if (img.position !== undefined && !isFocalPoint(img.position)) {
+      err(`${at}[${i}].position must look like "50% 88%" (0-100 for each)`);
+    }
+  });
+}
+
+const VIDEO_SRC_PATTERN = /^\/.+\.(mp4|webm)$/i;
+
+function checkVideos(
+  value: unknown,
+  at: string,
+  err: (msg: string) => void,
+): void {
+  if (!Array.isArray(value)) {
+    err(`${at} must be an array`);
+    return;
+  }
+  value.forEach((vid: unknown, i: number) => {
+    if (!isObj(vid)) return err(`${at}[${i}] must be an object`);
+    if (!isNonEmptyString(vid.src) || !VIDEO_SRC_PATTERN.test(vid.src)) {
+      err(`${at}[${i}].src must start with "/" and end in .mp4 or .webm`);
+    }
+    if (!isNonEmptyString(vid.title)) {
+      err(`${at}[${i}].title must be a non-empty string`);
+    }
+    if (
+      vid.poster !== undefined &&
+      !(isNonEmptyString(vid.poster) && vid.poster.startsWith("/"))
+    ) {
+      err(`${at}[${i}].poster must start with "/" when present`);
     }
   });
 }
@@ -136,6 +197,7 @@ function validateOne(item: unknown, index: number, errors: string[]): void {
     err(`"variants" must be an array`);
   } else {
     const variantIds = new Set<string>();
+    const grades = new Set<string>();
     let availableCount = 0;
     item.variants.forEach((v: unknown, i: number) => {
       const at = `variants[${i}]`;
@@ -149,6 +211,8 @@ function validateOne(item: unknown, index: number, errors: string[]): void {
       }
       if (v.grade !== null && !isNonEmptyString(v.grade)) {
         err(`${at}.grade must be null or a non-empty string`);
+      } else if (v.grade !== null) {
+        grades.add(v.grade);
       }
       if (!isNonEmptyString(v.label)) err(`${at}.label must be a non-empty string`);
       if (v.sizeCm !== null && !isNonEmptyString(v.sizeCm)) {
@@ -166,7 +230,23 @@ function validateOne(item: unknown, index: number, errors: string[]): void {
         availableCount += 1;
       }
       checkImages(v.images, `${at}.images`, err);
+      checkVideos(v.videos, `${at}.videos`, err);
     });
+    // Grade notes must refer to a grade that exists (catches typos).
+    if (item.gradeNotes !== undefined) {
+      if (!isObj(item.gradeNotes)) {
+        err(`"gradeNotes" must be an object`);
+      } else {
+        for (const [grade, note] of Object.entries(item.gradeNotes)) {
+          if (!grades.has(grade)) {
+            err(`gradeNotes["${grade}"] does not match any variant grade`);
+          }
+          if (!isNonEmptyString(note)) {
+            err(`gradeNotes["${grade}"] must be a non-empty string`);
+          }
+        }
+      }
+    }
     // Fish status and variant availability must agree.
     if (item.variants.length > 0) {
       if (item.status === "available" && availableCount === 0) {
@@ -179,15 +259,7 @@ function validateOne(item: unknown, index: number, errors: string[]): void {
   }
 
   checkImages(item.images, "images", err);
-  if (!Array.isArray(item.videos)) {
-    err(`"videos" must be an array`);
-  } else {
-    item.videos.forEach((vid: unknown, i: number) => {
-      if (!isObj(vid) || !isNonEmptyString(vid.src) || !isNonEmptyString(vid.title)) {
-        err(`videos[${i}] needs non-empty "src" and "title"`);
-      }
-    });
-  }
+  checkVideos(item.videos, "videos", err);
 
   const care = item.care;
   if (!isObj(care)) {

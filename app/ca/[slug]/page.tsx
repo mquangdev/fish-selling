@@ -61,23 +61,10 @@ export default async function FishDetailPage({
         <div>
           <FishGallery
             images={fish.images}
+            videos={fish.videos}
             variants={fish.variants}
             name={fish.name}
           />
-          {fish.videos.length > 0 && (
-            <div className="mt-4 space-y-4">
-              {fish.videos.map((video) => (
-                <video
-                  key={video.src}
-                  src={video.src}
-                  controls
-                  preload="none"
-                  aria-label={video.title}
-                  className="w-full rounded-2xl bg-black"
-                />
-              ))}
-            </div>
-          )}
         </div>
 
         <div className="space-y-6">
@@ -93,7 +80,10 @@ export default async function FishDetailPage({
             <p className="mt-3 text-ocean-800">{fish.description}</p>
           </div>
 
-          <VariantsList variants={fish.variants} />
+          <VariantsList
+            variants={fish.variants}
+            gradeNotes={fish.gradeNotes}
+          />
           <CopyMessage message={getZaloMessage(fish)} />
         </div>
       </div>
