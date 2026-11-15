@@ -17,8 +17,10 @@ Full requirements live in `docs/spec.md`. Read it before starting any feature.
 
 - `npm run dev`: dev server
 - `npm run lint`: ESLint
-- `npx tsc --noEmit`: type check
-- `npm run build`: production build
+- `npm run typecheck`: type check (runs `next typegen` first so the generated route types exist, then `tsc --noEmit`)
+- `npm run build`: production build (also validates `data/fish.json` and `data/site.json`)
+
+CI runs `npm ci`, lint, typecheck and build on every pull request and on pushes to `main`. A PR should be green before it is merged.
 
 ## Project layout
 
@@ -65,7 +67,7 @@ Follow the layout that `create-next-app` generated (check whether `src/` exists)
 
 Before saying a task is finished:
 
-1. `npm run lint`, `npx tsc --noEmit` and `npm run build` all pass
+1. `npm run lint`, `npm run typecheck` and `npm run build` all pass (CI runs the same three)
 2. The page works at mobile width (390px) and desktop width
 3. No console errors or hydration warnings
 4. Changes are committed on the feature branch with a clear message
