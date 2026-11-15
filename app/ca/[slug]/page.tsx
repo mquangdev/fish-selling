@@ -11,7 +11,8 @@ import { VariantSelectionProvider } from "@/components/fish/VariantSelection";
 import VariantsList from "@/components/fish/VariantsList";
 import ZaloStickyBar from "@/components/fish/ZaloStickyBar";
 import { getFishBySlug, getVisibleFish, getZaloMessage } from "@/lib/fish";
-import { buildPageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { buildPageMetadata, buildProductJsonLd } from "@/lib/seo";
 
 // Known slugs are prerendered by generateStaticParams. Unknown or hidden slugs
 // must block so notFound() can return a real HTTP 404 instead of a streamed 200.
@@ -115,6 +116,7 @@ export default async function FishDetailPage({
       </div>
 
       <ZaloStickyBar fish={fish} />
+      <JsonLd data={buildProductJsonLd(fish)} />
     </div>
   );
 }
