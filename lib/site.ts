@@ -9,8 +9,7 @@ function readEnv(value: string | undefined): string | null {
   return trimmed ? trimmed : null;
 }
 
-/** Placeholder until the owner provides the farm name. */
-export const SITE_NAME = "[TÊN TRẠI]";
+export const SITE_NAME = "Coder chơi cá";
 export const SITE_DESCRIPTION =
   "Cá cảnh nhà nuôi: pleco và molly khỏe, dễ nuôi. Nhắn Zalo để biết size và giá.";
 

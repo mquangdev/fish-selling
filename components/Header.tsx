@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import MobileMenu, { type NavLink } from "@/components/MobileMenu";
 import { SITE_NAME } from "@/lib/site";
@@ -14,8 +15,16 @@ export default function Header() {
       <div className="relative mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
         <Link
           href="/"
-          className="flex min-h-11 items-center text-lg font-bold text-ocean-800"
+          className="flex min-h-11 items-center gap-2 text-lg font-bold text-ocean-800"
         >
+          <Image
+            src="/logo.svg"
+            alt=""
+            width={68}
+            height={40}
+            priority
+            className="h-10 w-auto"
+          />
           {SITE_NAME}
         </Link>
 
