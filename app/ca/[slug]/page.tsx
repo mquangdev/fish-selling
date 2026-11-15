@@ -11,6 +11,8 @@ import { VariantSelectionProvider } from "@/components/fish/VariantSelection";
 import VariantsList from "@/components/fish/VariantsList";
 import ZaloStickyBar from "@/components/fish/ZaloStickyBar";
 import { getFishBySlug, getVisibleFish, getZaloMessage } from "@/lib/fish";
+import JsonLd from "@/components/JsonLd";
+import { buildPageMetadata, buildProductJsonLd } from "@/lib/seo";
 
 // Known slugs are prerendered by generateStaticParams. Unknown or hidden slugs
 // must block so notFound() can return a real HTTP 404 instead of a streamed 200.
@@ -31,7 +33,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const fish = findVisibleFish(slug);
   if (!fish) return {};
-  return { title: fish.seo.title, description: fish.seo.description };
+  const cover = fish.images[0];
+  return buildPageMetadata({
+    title: fish.seo.title,
+    description: fish.seo.description,
+    path: `/ca/${fish.slug}`,
+    image: cover ? { src: cover.src, alt: cover.alt } : undefined,
+  });
 }
 
 export default async function FishDetailPage({
@@ -108,6 +116,7 @@ export default async function FishDetailPage({
       </div>
 
       <ZaloStickyBar fish={fish} />
+      <JsonLd data={buildProductJsonLd(fish)} />
     </div>
   );
 }
