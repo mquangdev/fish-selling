@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ZaloButton from "@/components/ZaloButton";
+import { DEFAULT_TITLE, getSiteUrl } from "@/lib/seo";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -13,8 +14,11 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | Cá cảnh nhà nuôi`,
+  // Lets relative metadata URLs (canonical, Open Graph images) resolve to absolute ones.
+  metadataBase: new URL(getSiteUrl()),
+  title: DEFAULT_TITLE,
   description: SITE_DESCRIPTION,
+  openGraph: { type: "website", locale: "vi_VN", siteName: SITE_NAME },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

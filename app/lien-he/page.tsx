@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import ZaloCta from "@/components/ZaloCta";
+import { buildPageMetadata } from "@/lib/seo";
 import {
   PLACEHOLDER,
   SITE_NAME,
@@ -8,11 +8,12 @@ import {
   siteConfig,
 } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: `Liên hệ | ${SITE_NAME}`,
   description:
     "Liên hệ qua Zalo, điện thoại hoặc mạng xã hội để hỏi cá, biết size và giá.",
-};
+  path: "/lien-he",
+});
 
 const cardClass =
   "flex min-h-14 items-center justify-between gap-3 rounded-xl border border-ocean-100 bg-white px-4 py-3 font-semibold text-ocean-900 shadow-sm hover:bg-ocean-50";

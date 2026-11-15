@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import ZaloCta from "@/components/ZaloCta";
+import { buildPageMetadata } from "@/lib/seo";
 import { PLACEHOLDER, SITE_NAME, siteData } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: `Chính sách | ${SITE_NAME}`,
   description:
     "Chính sách vận chuyển, đóng gói, bảo hành chết cá, thanh toán và đổi trả.",
-};
+  path: "/chinh-sach",
+});
 
 export default function PolicyPage() {
   const { intro, sections } = siteData.policy;

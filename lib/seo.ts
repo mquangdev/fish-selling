@@ -24,6 +24,8 @@ export function getSiteUrl(): string {
 
 /** Absolute URL for a site path such as "/ca/molly-sanke". */
 export function absoluteUrl(path: string): string {
+  // The home page is the bare origin, matching what the canonical link shows.
+  if (path === "/" || path === "") return getSiteUrl();
   return `${getSiteUrl()}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
