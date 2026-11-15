@@ -41,7 +41,7 @@ Người chơi cá cảnh tại Việt Nam, đa số xem bằng điện thoại,
 Vận chuyển cá sống, khu vực giao, đóng gói, bảo hành chết cá (DOA), thanh toán, đổi trả. **Nội dung do chủ trại quyết định.** Agent không được tự bịa chính sách: dùng placeholder `[CẦN BỔ SUNG]` ở những chỗ chưa có thông tin.
 
 ### 4.4 Trang liên hệ `/lien-he`
-Zalo, số điện thoại, Facebook, địa chỉ/khu vực (nếu chủ trại muốn công khai), giờ trả lời tin nhắn. Mọi thông tin lấy từ biến môi trường hoặc một file cấu hình trung tâm.
+Zalo, số điện thoại, Facebook, địa chỉ/khu vực (nếu chủ trại muốn công khai), giờ trả lời tin nhắn. Mọi thông tin lấy từ file cấu hình trung tâm `data/site.json` (kiểm tra hợp lệ lúc build, giống `data/fish.json`): `contact.phone`, `contact.zaloUrl`, danh sách `contact.socials` (thêm kênh mới chỉ cần thêm một dòng), `contact.address`, `contact.pickupNote`, `contact.replyHours`. Giá trị `null` thì không hiển thị (riêng Zalo và số điện thoại hiện placeholder `[CẦN BỔ SUNG]`). Nội dung chính sách ở 4.3 cũng nằm trong `policy.sections` của file này.
 
 ### 4.5 Thành phần dùng chung
 - Header gọn, menu thu gọn trên mobile
@@ -125,9 +125,8 @@ Khai báo tên trong `.env.example`, giá trị thật đặt trên Vercel và `
 | Biến | Ý nghĩa |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | URL gốc của site (dùng cho sitemap, canonical, OG) |
-| `NEXT_PUBLIC_ZALO_URL` | Link Zalo (ví dụ `https://zalo.me/<số điện thoại>`) |
-| `NEXT_PUBLIC_PHONE` | Số điện thoại hiển thị |
-| `NEXT_PUBLIC_FACEBOOK_URL` | Link Facebook/fanpage (tùy chọn) |
+
+Thông tin liên hệ (số điện thoại, link Zalo, TikTok, Facebook...) không còn là biến môi trường mà nằm trong `data/site.json` (xem mục 4.4).
 
 ## 9. Lộ trình (mỗi mục = một nhánh + một PR)
 

@@ -28,6 +28,7 @@ Follow the layout that `create-next-app` generated (check whether `src/` exists)
 - `components/`: reusable UI components
 - `lib/fish.ts`: typed loader and helpers for `data/fish.json` (single source of truth for types)
 - `data/fish.json`: all fish content
+- `data/site.json`: site name, contact details and policy sections
 - `public/images/<slug>/`: fish photos, one folder per fish
 - `docs/`: specs and notes
 
@@ -46,7 +47,7 @@ Follow the layout that `create-next-app` generated (check whether `src/` exists)
 - `stock: null` means unknown: do not show a stock number
 - An empty `images` array must render a neutral placeholder, never a broken image
 - Prefer server components; add `"use client"` only when interactivity requires it
-- Contact links come from env vars, never hardcoded: `NEXT_PUBLIC_ZALO_URL`, `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_FACEBOOK_URL`, `NEXT_PUBLIC_SITE_URL`
+- Contact details (phone, Zalo, social links) and policy text live in `data/site.json`, read through `lib/site.ts`; never hardcode them in components. The only env var is `NEXT_PUBLIC_SITE_URL`
 - Commit messages follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`)
 
 ## Rules
