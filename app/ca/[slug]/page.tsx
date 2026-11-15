@@ -7,7 +7,8 @@ import StatusBadge from "@/components/StatusBadge";
 import CareSection from "@/components/fish/CareSection";
 import CopyMessage from "@/components/fish/CopyMessage";
 import OriginSection from "@/components/fish/OriginSection";
-import VariantsTable from "@/components/fish/VariantsTable";
+import { VariantSelectionProvider } from "@/components/fish/VariantSelection";
+import VariantsList from "@/components/fish/VariantsList";
 import ZaloStickyBar from "@/components/fish/ZaloStickyBar";
 import { getFishBySlug, getVisibleFish, getZaloMessage } from "@/lib/fish";
 
@@ -55,9 +56,14 @@ export default async function FishDetailPage({
         <span className="text-ocean-900">{fish.name}</span>
       </nav>
 
+      <VariantSelectionProvider>
       <div className="mt-4 grid gap-8 md:grid-cols-2">
         <div>
-          <FishGallery images={fish.images} name={fish.name} />
+          <FishGallery
+            images={fish.images}
+            variants={fish.variants}
+            name={fish.name}
+          />
           {fish.videos.length > 0 && (
             <div className="mt-4 space-y-4">
               {fish.videos.map((video) => (
@@ -87,10 +93,11 @@ export default async function FishDetailPage({
             <p className="mt-3 text-ocean-800">{fish.description}</p>
           </div>
 
-          <VariantsTable variants={fish.variants} />
+          <VariantsList variants={fish.variants} />
           <CopyMessage message={getZaloMessage(fish)} />
         </div>
       </div>
+      </VariantSelectionProvider>
 
       <div className="mt-12 space-y-12">
         <CareSection care={fish.care} />
