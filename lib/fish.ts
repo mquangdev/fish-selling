@@ -220,6 +220,34 @@ export function formatPrice(price: number | null): string {
   return `${priceFormatter.format(price)} ₫`;
 }
 
+/** Customer-facing label for each status. */
+export const STATUS_LABELS: Record<FishStatus, string> = {
+  available: "Còn cá",
+  sold_out: "Hết hàng",
+  coming_soon: "Sắp có",
+  hidden: "",
+};
+
+/** Combined size range across variants, e.g. "2-5 cm". null if unknown. */
+export function getSizeRange(fish: Fish): string | null {
+  const numbers = fish.variants
+    .flatMap((variant) => variant.sizeCm.match(/\d+(?:[.,]\d+)?/g) ?? [])
+    .map((value) => Number(value.replace(",", ".")))
+    .filter((value) => Number.isFinite(value));
+  if (numbers.length === 0) return null;
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+  return min === max ? `${min} cm` : `${min}-${max} cm`;
+}
+
+/** Lowest known variant price, or null when every price is "contact". */
+export function getStartingPrice(fish: Fish): number | null {
+  const prices = fish.variants
+    .map((variant) => variant.price)
+    .filter((price): price is number => price !== null);
+  return prices.length > 0 ? Math.min(...prices) : null;
+}
+
 export function getAllFish(): Fish[] {
   return allFish;
 }
