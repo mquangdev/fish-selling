@@ -9,8 +9,16 @@
     "tagline": "Pleco bristlenose nhà nuôi, hiền, nhỏ gọn, hợp bể cộng đồng",
     "description": "Pleco L144 thuộc nhóm bristlenose (Ancistrus), nổi tiếng hiền lành, nhỏ gọn và dễ nuôi, phù hợp bể cộng đồng và bể thủy sinh. Cá hoạt động nhiều về đêm, thích ẩn nấp trong hang và gỗ lũa. Cá được trại tự sinh sản và nuôi tại trại.",
     "variants": [
-      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
-      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+      {
+        "id": "size-4-5",
+        "grade": null,
+        "label": "Size vừa",
+        "sizeCm": "4-5",
+        "price": 130000,
+        "stock": null,
+        "status": "sold_out",
+        "images": []
+      }
     ],
     "images": [],
     "videos": [],
@@ -39,8 +47,8 @@
     "todo": [
       "L144 hay bị gọi nhầm: bản gốc nhập từ Paraguay khác với dòng 'blue eye lemon' (vàng, mắt xanh/đen) bán phổ biến. Ghi đúng loại đang nuôi vào description và commonName.",
       "Kiểm tra lại cỡ trưởng thành và thông số thực tế với cá của bạn",
-      "Điền giá, size, số lượng, thông tin cá bố mẹ",
-      "Thêm ảnh vào public/images/pleco-l144/ và khai báo trong images"
+      "Điền số lượng và thông tin cá bố mẹ",
+      "Thêm ảnh chung vào public/images/pleco-l144/ và ảnh phân loại vào public/images/pleco-l144/size-4-5/, rồi khai báo trong images"
     ]
   },
   {
@@ -53,8 +61,36 @@
     "tagline": "Molly màu caramel nổi bật, dễ nuôi, đẻ con",
     "description": "Molly Sakura Caramel là dòng molly cảnh có màu sắc nổi bật, khỏe, dễ nuôi và sinh sản đều. Cá hợp bể cộng đồng và thích hợp cho người mới chơi cá.",
     "variants": [
-      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
-      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+      {
+        "id": "dep-to",
+        "grade": "Phẩm đẹp",
+        "label": "Size tơ",
+        "sizeCm": null,
+        "price": 150000,
+        "stock": null,
+        "status": "available",
+        "images": []
+      },
+      {
+        "id": "dep-sinh-san",
+        "grade": "Phẩm đẹp",
+        "label": "Size sinh sản",
+        "sizeCm": null,
+        "price": 250000,
+        "stock": null,
+        "status": "sold_out",
+        "images": []
+      },
+      {
+        "id": "thuy-sinh",
+        "grade": "Phẩm thủy sinh",
+        "label": "Giá chung",
+        "sizeCm": null,
+        "price": 50000,
+        "stock": null,
+        "status": "available",
+        "images": []
+      }
     ],
     "images": [],
     "videos": [],
@@ -82,8 +118,8 @@
     },
     "todo": [
       "Mô tả lại màu sắc đúng với cá thật của bạn",
-      "Điền giá, size, số lượng, thông tin cá bố mẹ",
-      "Thêm ảnh vào public/images/molly-sakura-caramel/ và khai báo trong images"
+      "Điền size cm từng phân loại, số lượng và thông tin cá bố mẹ",
+      "Thêm ảnh chung vào public/images/molly-sakura-caramel/ và ảnh từng phân loại vào dep-to/, dep-sinh-san/, thuy-sinh/, rồi khai báo trong images"
     ]
   },
   {
@@ -96,8 +132,36 @@
     "tagline": "Molly hoa văn ba màu kiểu koi Sanke, khỏe và dễ nuôi",
     "description": "Molly Sanke có hoa văn nhiều mảng màu lấy cảm hứng từ cá koi Sanke, tạo điểm nhấn cho bể cộng đồng. Cá khỏe, dễ nuôi và sinh sản đều.",
     "variants": [
-      { "label": "Size nhỏ", "sizeCm": "2-3", "price": null, "stock": null },
-      { "label": "Size vừa", "sizeCm": "4-5", "price": null, "stock": null }
+      {
+        "id": "dep-to",
+        "grade": "Phẩm đẹp",
+        "label": "Size tơ",
+        "sizeCm": null,
+        "price": 200000,
+        "stock": null,
+        "status": "sold_out",
+        "images": []
+      },
+      {
+        "id": "dep-sinh-san",
+        "grade": "Phẩm đẹp",
+        "label": "Size sinh sản",
+        "sizeCm": null,
+        "price": 350000,
+        "stock": null,
+        "status": "sold_out",
+        "images": []
+      },
+      {
+        "id": "thuy-sinh",
+        "grade": "Phẩm thủy sinh",
+        "label": "Giá chung",
+        "sizeCm": null,
+        "price": 50000,
+        "stock": null,
+        "status": "sold_out",
+        "images": []
+      }
     ],
     "images": [],
     "videos": [],
@@ -125,8 +189,8 @@
     },
     "todo": [
       "Mô tả lại màu và hoa văn đúng với cá thật của bạn",
-      "Điền giá, size, số lượng, thông tin cá bố mẹ",
-      "Thêm ảnh vào public/images/molly-sanke/ và khai báo trong images"
+      "Điền size cm từng phân loại, số lượng và thông tin cá bố mẹ",
+      "Thêm ảnh chung vào public/images/molly-sanke/ và ảnh từng phân loại vào dep-to/, dep-sinh-san/, thuy-sinh/, rồi khai báo trong images"
     ]
   }
 ]
