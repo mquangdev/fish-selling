@@ -46,18 +46,23 @@ export default function Footer() {
                 </span>
               )}
             </li>
-            {siteConfig.facebookUrl && (
-              <li>
+            {siteConfig.socials.map((social) => (
+              <li key={social.id}>
                 <a
-                  href={siteConfig.facebookUrl}
+                  href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={linkClass}
                 >
-                  Facebook
+                  {social.label}
                 </a>
               </li>
-            )}
+            ))}
+            <li>
+              <Link href="/lien-he" className={linkClass}>
+                Liên hệ
+              </Link>
+            </li>
             <li>
               <Link href="/chinh-sach" className={linkClass}>
                 Chính sách

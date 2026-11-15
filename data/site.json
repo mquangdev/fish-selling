@@ -1,0 +1,66 @@
+{
+  "name": "Coder chơi cá",
+  "description": "Cá cảnh nhà nuôi: pleco và molly khỏe, dễ nuôi. Nhắn Zalo để biết size và giá.",
+  "contact": {
+    "phone": "0904 828 465",
+    "zaloUrl": "https://zalo.me/0904828465",
+    "socials": [
+      {
+        "id": "tiktok",
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@coderchoica"
+      },
+      {
+        "id": "facebook",
+        "label": "Facebook",
+        "url": "https://www.facebook.com/mquangdev/"
+      }
+    ],
+    "address": null,
+    "pickupNote": "Khách đến lấy cá tại trại vui lòng hẹn trước qua Zalo.",
+    "replyHours": null
+  },
+  "policy": {
+    "intro": "Đây là cách mình gửi cá, đóng gói, bảo hành và thanh toán. Có gì chưa rõ, bạn cứ nhắn Zalo hỏi mình nhé.",
+    "sections": [
+      {
+        "id": "van-chuyen",
+        "title": "Vận chuyển và nhận cá",
+        "body": [
+          "Mình ship cá sống toàn quốc.",
+          "Phí ship và thời gian giao được báo qua Zalo, tùy theo địa chỉ nhận.",
+          "Bạn cũng có thể đến lấy cá trực tiếp tại trại. Vui lòng hẹn trước qua Zalo."
+        ]
+      },
+      {
+        "id": "dong-goi",
+        "title": "Đóng gói",
+        "body": [
+          "Cá được đóng trong túi nilon bơm oxy và đặt trong hộp xốp giữ nhiệt."
+        ]
+      },
+      {
+        "id": "bao-hanh",
+        "title": "Bảo hành chết cá",
+        "body": [
+          "Mình có bảo hành cá chết khi nhận hàng.",
+          "Điều kiện: bạn cần quay video đầy đủ lúc khui hộp và kiểm tra tình trạng cá.",
+          "Nếu cá chết, mình đền bù bằng tiền mặt theo giá trị con cá, hoặc đền con khác."
+        ]
+      },
+      {
+        "id": "thanh-toan",
+        "title": "Thanh toán",
+        "body": ["Thanh toán bằng chuyển khoản trước."]
+      },
+      {
+        "id": "doi-tra",
+        "title": "Đổi trả",
+        "body": [
+          "Không đổi trả sau khi giao.",
+          "Trường hợp cá chết khi nhận hàng được xử lý theo mục Bảo hành chết cá ở trên."
+        ]
+      }
+    ]
+  }
+}
