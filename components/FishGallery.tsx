@@ -67,6 +67,9 @@ function GalleryView({ media, name }: { media: Media[]; name: string }) {
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
               priority={index === 0}
+              style={
+                current.position ? { objectPosition: current.position } : undefined
+              }
               className="object-cover"
             />
           ) : (
@@ -112,6 +115,9 @@ function GalleryView({ media, name }: { media: Media[]; name: string }) {
                     alt=""
                     fill
                     sizes="80px"
+                    style={
+                      item.position ? { objectPosition: item.position } : undefined
+                    }
                     className="object-cover"
                   />
                 )}

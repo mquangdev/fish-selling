@@ -26,6 +26,7 @@ export default function FishCard({ fish }: { fish: Fish }) {
             alt={cover.alt}
             fill
             sizes="(min-width: 768px) 33vw, 100vw"
+            style={cover.position ? { objectPosition: cover.position } : undefined}
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (

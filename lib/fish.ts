@@ -8,6 +8,11 @@ export type VariantStatus = "available" | "sold_out";
 export interface FishImage {
   src: string;
   alt: string;
+  /**
+   * Optional focal point used when the image is cropped, as CSS object-position
+   * "<x>% <y>%" (0-100). Example: "50% 88%" keeps the bottom of a tall photo.
+   */
+  position?: string;
 }
 
 export interface FishVideo {
@@ -104,6 +109,14 @@ function isRange(value: unknown): value is [number, number] {
   );
 }
 
+const FOCAL_POINT_PATTERN = /^(\d{1,3})% (\d{1,3})%$/;
+
+function isFocalPoint(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const match = FOCAL_POINT_PATTERN.exec(value);
+  return !!match && Number(match[1]) <= 100 && Number(match[2]) <= 100;
+}
+
 function checkImages(
   value: unknown,
   at: string,
@@ -116,6 +129,10 @@ function checkImages(
   value.forEach((img: unknown, i: number) => {
     if (!isObj(img) || !isNonEmptyString(img.src) || !isNonEmptyString(img.alt)) {
       err(`${at}[${i}] needs non-empty "src" and "alt"`);
+      return;
+    }
+    if (img.position !== undefined && !isFocalPoint(img.position)) {
+      err(`${at}[${i}].position must look like "50% 88%" (0-100 for each)`);
     }
   });
 }
