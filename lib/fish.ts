@@ -228,6 +228,25 @@ export const STATUS_LABELS: Record<FishStatus, string> = {
   hidden: "",
 };
 
+/** Formats a [min, max] range with a decimal comma, e.g. [6.5, 7.5] -> "6,5-7,5". */
+export function formatRange([min, max]: [number, number]): string {
+  const format = (value: number) => String(value).replace(".", ",");
+  return min === max ? format(min) : `${format(min)}-${format(max)}`;
+}
+
+/** Zalo call-to-action label per status. No promises about pre-orders. */
+export const ZALO_LABELS: Record<FishStatus, string> = {
+  available: "Hỏi mua qua Zalo",
+  sold_out: "Nhắn Zalo hỏi lô sau",
+  coming_soon: "Nhắn Zalo hỏi lô sắp có",
+  hidden: "Nhắn Zalo",
+};
+
+/** Sample message the customer can copy into Zalo. */
+export function getZaloMessage(fish: Fish): string {
+  return `Chào shop, mình muốn hỏi về ${fish.name}. Cho mình xin thông tin size, giá và tình trạng nhé.`;
+}
+
 /** Combined size range across variants, e.g. "2-5 cm". null if unknown. */
 export function getSizeRange(fish: Fish): string | null {
   const numbers = fish.variants
