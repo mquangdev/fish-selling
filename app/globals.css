@@ -2,25 +2,43 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0b2a3d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-be-vietnam-pro);
+
+  /* Ocean blue palette */
+  --color-ocean-50: #eef7fb;
+  --color-ocean-100: #d5ecf6;
+  --color-ocean-200: #aadaee;
+  --color-ocean-300: #72bfdd;
+  --color-ocean-400: #3a9fc8;
+  --color-ocean-500: #1d82ad;
+  --color-ocean-600: #146a91;
+  --color-ocean-700: #12577a;
+  --color-ocean-800: #134963;
+  --color-ocean-900: #0b2a3d;
+
+  /* Call-to-action (Zalo) */
+  --color-accent: #0068ff;
+  --color-accent-dark: #0052cc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-be-vietnam-pro), system-ui, sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
