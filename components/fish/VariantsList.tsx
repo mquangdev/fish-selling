@@ -25,8 +25,10 @@ function VariantStatusPill({ status }: { status: FishVariant["status"] }) {
 
 export default function VariantsList({
   variants,
+  gradeNotes,
 }: {
   variants: FishVariant[];
+  gradeNotes?: Record<string, string>;
 }) {
   const { selectedId, select } = useVariantSelection();
   const groups = groupVariantsByGrade(variants);
@@ -40,6 +42,11 @@ export default function VariantsList({
             <h3 className="text-sm font-semibold text-ocean-700">
               {group.grade}
             </h3>
+          )}
+          {group.grade && gradeNotes?.[group.grade] && (
+            <p className="mt-1 rounded-lg bg-ocean-50 px-3 py-2 text-sm text-ocean-800">
+              {gradeNotes[group.grade]}
+            </p>
           )}
           <ul className="mt-2 space-y-2">
             {group.variants.map((variant) => {
@@ -58,7 +65,7 @@ export default function VariantsList({
                         : "border-ocean-100 bg-white hover:bg-ocean-50"
                     }`}
                   >
-                    {thumb && (
+                    {thumb ? (
                       <span className="relative h-10 w-12 shrink-0 overflow-hidden rounded-md">
                         <Image
                           src={thumb.src}
@@ -68,6 +75,17 @@ export default function VariantsList({
                           className="object-cover"
                         />
                       </span>
+                    ) : (
+                      variant.videos.length > 0 && (
+                        <span
+                          aria-hidden="true"
+                          className="flex h-10 w-12 shrink-0 items-center justify-center rounded-md bg-ocean-100 text-ocean-700"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </span>
+                      )
                     )}
                     <span className="min-w-0 flex-1">
                       <span

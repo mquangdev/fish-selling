@@ -80,7 +80,10 @@ export default async function FishDetailPage({
             <p className="mt-3 text-ocean-800">{fish.description}</p>
           </div>
 
-          <VariantsList variants={fish.variants} />
+          <VariantsList
+            variants={fish.variants}
+            gradeNotes={fish.gradeNotes}
+          />
           <CopyMessage message={getZaloMessage(fish)} />
         </div>
       </div>
