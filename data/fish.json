@@ -114,7 +114,13 @@
         ]
       }
     ],
-    "images": [],
+    "images": [
+      {
+        "src": "/images/molly-sakura-caramel/anh_bia.jpg",
+        "alt": "Hai con Molly Sakura Caramel màu cam vàng trong hộp nhựa trong",
+        "position": "50% 96%"
+      }
+    ],
     "videos": [],
     "gradeNotes": {
       "Phẩm đẹp": "Phẩm đẹp được chọn từng con. Video chỉ để tham khảo, con thực tế có thể khác. Bạn nhắn Zalo, mình sẽ quay những con đang còn để bạn chọn.",
@@ -144,8 +150,7 @@
     },
     "todo": [
       "Mô tả lại màu sắc đúng với cá thật của bạn",
-      "Điền size cm từng phân loại, số lượng và thông tin cá bố mẹ",
-      "Thêm ảnh chung vào public/images/molly-sakura-caramel/ và ảnh từng phân loại vào dep-to/, dep-sinh-san/, thuy-sinh/, rồi khai báo trong images"
+      "Điền size cm từng phân loại, số lượng và thông tin cá bố mẹ"
     ]
   },
   {
