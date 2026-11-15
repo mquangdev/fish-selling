@@ -51,7 +51,9 @@
       {
         "id": "thanh-toan",
         "title": "Thanh toán",
-        "body": ["Thanh toán bằng chuyển khoản trước."]
+        "body": [
+          "Thanh toán bằng chuyển khoản trước 100% giá trị đơn hàng."
+        ]
       },
       {
         "id": "doi-tra",
