@@ -210,6 +210,16 @@ export function validateFish(raw: unknown): Fish[] {
 // if data/fish.json is invalid.
 const allFish: Fish[] = validateFish(rawFish);
 
+const priceFormatter = new Intl.NumberFormat("vi-VN");
+
+/** Formats a VND price. null (or any invalid value) renders as "Liên hệ". */
+export function formatPrice(price: number | null): string {
+  if (price === null || !isNonNegativeInt(price) || price === 0) {
+    return "Liên hệ";
+  }
+  return `${priceFormatter.format(price)} ₫`;
+}
+
 export function getAllFish(): Fish[] {
   return allFish;
 }
