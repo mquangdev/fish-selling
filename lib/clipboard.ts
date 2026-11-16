@@ -1,14 +1,19 @@
 /**
- * Copies text with the async Clipboard API, falling back to execCommand when
- * the API is unavailable (for example on non-HTTPS pages such as LAN dev).
+ * Copies text without waiting, for click handlers that must not delay a
+ * navigation (for example a link that opens another app in a new tab).
+ *
+ * The synchronous textarea copy runs first, inside the user gesture, so it works
+ * even when the new tab immediately takes focus; the async Clipboard API is also
+ * tried as a best effort. Returns whether the synchronous copy succeeded.
  */
-export async function copyText(text: string): Promise<boolean> {
+export function copyTextNow(text: string): boolean {
+  const ok = legacyCopy(text);
   try {
-    await navigator.clipboard.writeText(text);
-    return true;
+    void navigator.clipboard?.writeText(text).catch(() => {});
   } catch {
-    return legacyCopy(text);
+    // Ignore: the synchronous copy above is the one we rely on.
   }
+  return ok;
 }
 
 /** Synchronous copy through a hidden textarea; must run inside a user gesture. */

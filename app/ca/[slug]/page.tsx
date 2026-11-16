@@ -5,7 +5,7 @@ import FishCard from "@/components/FishCard";
 import FishGallery from "@/components/FishGallery";
 import StatusBadge from "@/components/StatusBadge";
 import CareSection from "@/components/fish/CareSection";
-import CopyMessage from "@/components/fish/CopyMessage";
+import ZaloMessage from "@/components/fish/ZaloMessage";
 import OriginSection from "@/components/fish/OriginSection";
 import { VariantSelectionProvider } from "@/components/fish/VariantSelection";
 import VariantsList from "@/components/fish/VariantsList";
@@ -92,7 +92,7 @@ export default async function FishDetailPage({
             variants={fish.variants}
             gradeNotes={fish.gradeNotes}
           />
-          <CopyMessage message={getZaloMessage(fish)} />
+          <ZaloMessage message={getZaloMessage(fish)} />
         </div>
       </div>
       </VariantSelectionProvider>
