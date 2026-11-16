@@ -21,7 +21,8 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    // -ml-2.5 lines the 24px icon up with the page content edge (the button is 44px wide).
+    <div className="-ml-2.5 md:hidden">
       <button
         type="button"
         aria-expanded={open}
