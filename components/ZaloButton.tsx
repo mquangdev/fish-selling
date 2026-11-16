@@ -32,7 +32,7 @@ export default function ZaloButton() {
       <span
         role="note"
         aria-label="Zalo chưa được cấu hình"
-        className={`${baseClass} bg-amber-100 text-amber-900`}
+        className={`${baseClass} bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200`}
       >
         [CẦN BỔ SUNG] Zalo
       </span>

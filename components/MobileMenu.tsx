@@ -53,7 +53,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         <nav
           id="mobile-menu"
           aria-label="Menu chính"
-          className="absolute inset-x-0 top-full border-b border-ocean-100 bg-white shadow-md"
+          className="absolute inset-x-0 top-full border-b border-ocean-100 bg-surface shadow-md"
         >
           <ul className="mx-auto flex max-w-5xl flex-col px-4 py-2">
             {links.map((link) => (

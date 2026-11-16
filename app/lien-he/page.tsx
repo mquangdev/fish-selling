@@ -16,7 +16,7 @@ export const metadata = buildPageMetadata({
 });
 
 const cardClass =
-  "flex min-h-14 items-center justify-between gap-3 rounded-xl border border-ocean-100 bg-white px-4 py-3 font-semibold text-ocean-900 shadow-sm hover:bg-ocean-50";
+  "flex min-h-14 items-center justify-between gap-3 rounded-xl border border-ocean-100 bg-surface px-4 py-3 font-semibold text-ocean-900 shadow-sm hover:bg-ocean-50";
 
 function ContactRow({ label, children }: { label: string; children: ReactNode }) {
   return (

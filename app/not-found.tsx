@@ -13,7 +13,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mt-6 inline-flex min-h-11 items-center rounded-full bg-ocean-700 px-6 font-semibold text-white hover:bg-ocean-800"
+        className="mt-6 inline-flex min-h-11 items-center rounded-full bg-brand-700 px-6 font-semibold text-white hover:bg-brand-800"
       >
         Về trang chủ
       </Link>

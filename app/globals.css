@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #0b2a3d;
+  --surface: #ffffff;
+
+  --ocean-50: #eef7fb;
+  --ocean-100: #d5ecf6;
+  --ocean-200: #aadaee;
+  --ocean-300: #72bfdd;
+  --ocean-400: #3a9fc8;
+  --ocean-500: #1d82ad;
+  --ocean-600: #146a91;
+  --ocean-700: #12577a;
+  --ocean-800: #134963;
+  --ocean-900: #0b2a3d;
 }
+
+/* Dark theme: the ocean scale is mirrored so text-ocean-900 stays the strongest text. */
+.dark {
+  color-scheme: dark;
+  --background: #071a26;
+  --foreground: #e6f3f9;
+  --surface: #0d2a3b;
+
+  --ocean-50: #0f3248;
+  --ocean-100: #174a64;
+  --ocean-200: #1d5f7f;
+  --ocean-300: #2a7ea3;
+  --ocean-400: #3a9fc8;
+  --ocean-500: #5bb4d6;
+  --ocean-600: #72bfdd;
+  --ocean-700: #9fd3e8;
+  --ocean-800: #c5e5f2;
+  --ocean-900: #e6f3f9;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
   --font-sans: var(--font-be-vietnam-pro);
 
-  /* Ocean blue palette */
-  --color-ocean-50: #eef7fb;
-  --color-ocean-100: #d5ecf6;
-  --color-ocean-200: #aadaee;
-  --color-ocean-300: #72bfdd;
-  --color-ocean-400: #3a9fc8;
-  --color-ocean-500: #1d82ad;
-  --color-ocean-600: #146a91;
-  --color-ocean-700: #12577a;
-  --color-ocean-800: #134963;
-  --color-ocean-900: #0b2a3d;
+  /* Ocean blue palette (values switch with the theme, see :root and .dark) */
+  --color-ocean-50: var(--ocean-50);
+  --color-ocean-100: var(--ocean-100);
+  --color-ocean-200: var(--ocean-200);
+  --color-ocean-300: var(--ocean-300);
+  --color-ocean-400: var(--ocean-400);
+  --color-ocean-500: var(--ocean-500);
+  --color-ocean-600: var(--ocean-600);
+  --color-ocean-700: var(--ocean-700);
+  --color-ocean-800: var(--ocean-800);
+  --color-ocean-900: var(--ocean-900);
+
+  /* Fixed dark blues for sections that keep a dark background with white text in both themes */
+  --color-brand-100: #d5ecf6;
+  --color-brand-700: #12577a;
+  --color-brand-800: #134963;
+  --color-brand-900: #0b2a3d;
 
   /* Call-to-action (Zalo) */
   --color-accent: #0068ff;

@@ -16,7 +16,7 @@ export default function ZaloCta({
 }) {
   if (!siteConfig.zaloUrl) {
     return (
-      <span className={`${base} bg-amber-100 text-amber-900 ${className}`}>
+      <span className={`${base} bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200 ${className}`}>
         {PLACEHOLDER} Zalo
       </span>
     );

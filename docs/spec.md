@@ -48,6 +48,7 @@ Zalo, số điện thoại, Facebook, địa chỉ/khu vực (nếu chủ trại
 - Footer: liên hệ, link chính sách
 - **Nút Zalo nổi** góc phải dưới trên mọi trang, không che nội dung quan trọng, có `aria-label`
 - Trang 404 tiếng Việt
+- **Đổi theme sáng/tối**: nút ở header, mặc định theo hệ điều hành, lựa chọn được nhớ (localStorage), không nháy sai màu khi tải trang
 
 ## 5. Mô hình dữ liệu
 
