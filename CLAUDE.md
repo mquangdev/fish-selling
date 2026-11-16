@@ -50,6 +50,7 @@ Follow the layout that `create-next-app` generated (check whether `src/` exists)
 - An empty `images` array must render a neutral placeholder, never a broken image
 - Prefer server components; add `"use client"` only when interactivity requires it
 - Contact details (phone, Zalo, social links) and policy text live in `data/site.json`, read through `lib/site.ts`; never hardcode them in components. The only env var is `NEXT_PUBLIC_SITE_URL`
+- Colors: use the `ocean-*` tokens (they flip in dark mode) and `bg-surface` for card/white backgrounds, never `bg-white`. Sections that stay dark with white text in both themes use `brand-*`. Theme is toggled by the `dark` class on `<html>`
 - Commit messages follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`)
 
 ## Rules
