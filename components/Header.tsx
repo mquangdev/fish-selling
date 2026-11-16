@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 import MobileMenu, { type NavLink } from "@/components/MobileMenu";
 import { SITE_NAME } from "@/lib/site";
 
@@ -31,20 +32,23 @@ export default function Header() {
           {SITE_NAME}
         </Link>
 
-        <nav aria-label="Menu chính" className="hidden md:block">
-          <ul className="flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="flex min-h-11 items-center rounded-lg px-3 font-medium text-ocean-900 hover:bg-ocean-50 hover:text-ocean-700"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="ml-auto flex items-center gap-1 md:ml-0">
+          <nav aria-label="Menu chính" className="hidden md:block">
+            <ul className="flex items-center gap-1">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="flex min-h-11 items-center rounded-lg px-3 font-medium text-ocean-900 hover:bg-ocean-50 hover:text-ocean-700"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
