@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: DEFAULT_TITLE,
   description: SITE_DESCRIPTION,
+  icons: { icon: { url: "/logo.svg", type: "image/svg+xml" } },
   openGraph: { type: "website", locale: "vi_VN", siteName: SITE_NAME },
 };
 
