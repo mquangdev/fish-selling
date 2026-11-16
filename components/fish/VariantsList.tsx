@@ -15,7 +15,7 @@ function VariantStatusPill({ status }: { status: FishVariant["status"] }) {
       className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
         inStock
           ? "bg-emerald-100 text-emerald-800"
-          : "bg-slate-200 text-slate-700"
+          : "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200"
       }`}
     >
       {inStock ? "Còn hàng" : "Hết hàng"}
@@ -90,7 +90,7 @@ export default function VariantsList({
                     <span className="min-w-0 flex-1">
                       <span
                         className={`block font-medium ${
-                          soldOut ? "text-slate-600" : "text-ocean-900"
+                          soldOut ? "text-slate-600 dark:text-slate-400" : "text-ocean-900"
                         }`}
                       >
                         {variant.label}
@@ -104,7 +104,7 @@ export default function VariantsList({
                     <span className="flex shrink-0 flex-col items-end gap-1">
                       <span
                         className={`font-semibold ${
-                          soldOut ? "text-slate-600" : "text-ocean-900"
+                          soldOut ? "text-slate-600 dark:text-slate-400" : "text-ocean-900"
                         }`}
                       >
                         {formatPrice(variant.price)}

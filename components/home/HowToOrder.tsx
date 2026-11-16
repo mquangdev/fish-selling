@@ -13,7 +13,7 @@ export default function HowToOrder() {
       <ol className="mt-8 grid gap-6 md:grid-cols-3">
         {STEPS.map((step, index) => (
           <li key={step.title} className="flex items-start gap-4">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ocean-700 font-bold text-white">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-700 font-bold text-white">
               {index + 1}
             </span>
             <div>

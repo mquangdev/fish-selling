@@ -27,7 +27,7 @@ export default function Header() {
             width={68}
             height={40}
             priority
-            className="h-10 w-auto"
+            className="h-10 w-auto dark:rounded-lg dark:bg-[#F7F3E8] dark:px-1.5"
           />
           {SITE_NAME}
         </Link>

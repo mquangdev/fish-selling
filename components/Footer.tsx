@@ -2,14 +2,14 @@ import Link from "next/link";
 import { PLACEHOLDER, SITE_NAME, getPhoneHref, siteConfig } from "@/lib/site";
 
 const linkClass =
-  "inline-flex min-h-11 items-center font-medium text-ocean-100 underline-offset-4 hover:text-white hover:underline";
+  "inline-flex min-h-11 items-center font-medium text-brand-100 underline-offset-4 hover:text-white hover:underline";
 const placeholderClass = "inline-flex min-h-11 items-center text-amber-200";
 
 export default function Footer() {
   const phoneHref = getPhoneHref();
 
   return (
-    <footer className="bg-ocean-900 pb-20 text-ocean-100">
+    <footer className="bg-brand-900 pb-20 text-brand-100">
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-2">
         <div>
           <p className="text-lg font-bold text-white">{SITE_NAME}</p>
@@ -71,7 +71,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-ocean-800 px-4 py-4 text-center text-xs">
+      <div className="border-t border-brand-800 px-4 py-4 text-center text-xs">
         © {SITE_NAME}
       </div>
     </footer>
