@@ -34,7 +34,7 @@ Người chơi cá cảnh tại Việt Nam, đa số xem bằng điện thoại,
 - Mục "Size và giá" từ `variants`, gom nhóm theo `grade` (ví dụ "Phẩm đẹp", "Phẩm thủy sinh"). Mỗi phân loại hiện tên, size (chỉ khi `sizeCm` khác `null`), giá (`null` hiện "Liên hệ"), nhãn "Còn hàng" / "Hết hàng" theo `status`, và ảnh nhỏ nếu có `images`. Bấm một phân loại thì gallery chuyển sang ảnh và video của phân loại đó (nếu có), nếu không có thì giữ media chung của cá. Mỗi phẩm có thể có một dòng ghi chú (`gradeNotes`) hiện một lần dưới tiêu đề phẩm, ví dụ "video chỉ để tham khảo"
 - Khối "Thông tin chăm sóc": nhiệt độ, pH, kích thước trưởng thành, bể tối thiểu, tính cách, thức ăn, mẹo
 - Khối "Nguồn gốc": thông tin sinh sản từ `breeding` (ẩn các trường `null`)
-- Nút "Hỏi mua qua Zalo" cố định; link Zalo có sẵn nội dung tin nhắn mẫu nhắc tên cá nếu cấu hình cho phép
+- Nút "Hỏi mua qua Zalo" cố định; tin nhắn mẫu nhắc tên cá. Link Zalo cá nhân (`zalo.me/<số>`) không điền sẵn được nội dung vào ô chat (Zalo bỏ qua tham số `text`), nên khối "Tin nhắn mẫu" có một nút vừa tự sao chép tin nhắn vừa mở Zalo; khách chỉ cần dán vào ô soạn tin
 - Có link sang các dòng cá khác ở cuối trang
 
 ### 4.3 Trang chính sách `/chinh-sach`
