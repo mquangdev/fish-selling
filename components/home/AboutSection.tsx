@@ -50,7 +50,7 @@ export default function AboutSection() {
           {POINTS.map((point) => (
             <li
               key={point.title}
-              className="rounded-2xl bg-white p-5 shadow-sm"
+              className="rounded-2xl bg-surface p-5 shadow-sm"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ocean-100 text-ocean-700">
                 <CheckIcon />

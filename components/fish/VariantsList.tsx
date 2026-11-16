@@ -62,7 +62,7 @@ export default function VariantsList({
                     className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-3 py-2 text-left ${
                       selected
                         ? "border-accent bg-ocean-50"
-                        : "border-ocean-100 bg-white hover:bg-ocean-50"
+                        : "border-ocean-100 bg-surface hover:bg-ocean-50"
                     }`}
                   >
                     {thumb ? (

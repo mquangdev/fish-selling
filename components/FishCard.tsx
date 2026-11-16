@@ -17,7 +17,7 @@ export default function FishCard({ fish }: { fish: Fish }) {
   return (
     <Link
       href={`/ca/${fish.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ocean-100 bg-white shadow-sm transition-shadow hover:shadow-md"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ocean-100 bg-surface shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-ocean-50">
         {cover ? (

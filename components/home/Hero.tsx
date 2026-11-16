@@ -2,7 +2,7 @@ import ZaloCta from "@/components/ZaloCta";
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-b from-ocean-50 to-white">
+    <section className="bg-gradient-to-b from-ocean-50 to-surface">
       <div className="mx-auto max-w-5xl px-4 py-14 text-center md:py-20">
         <h1 className="text-3xl font-bold leading-tight text-ocean-900 md:text-5xl">
           Cá cảnh nhà nuôi, khỏe và dễ chăm
